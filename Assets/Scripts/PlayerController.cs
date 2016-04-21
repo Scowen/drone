@@ -2,17 +2,16 @@
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
-	public float minThrust = 50; // The minimum thrust that can be applied.
-	public float idleThrust = 490.5f; // The amount needed to make the drone hover.
-	public float maxThrust = 800; // The maximum thrust that can be applied.
-	public float rotateSpeed = 4.2f; // The speed in which the drone can rotate.
-	public float tiltSpeed = 4.5f; // The speed in which the drone will try to bank and pitch.
-	public float maxTilt = 65.0f; // The maximum angle in degrees that the drone may tilt to.
+	public float minThrust = -80; // The minimum thrust that can be applied.
+	public float idleThrust = 122.5f; // The amount needed to make the drone hover.
+	public float maxThrust = 180; // The maximum thrust that can be applied.
+	public float rotateSpeed = 2.2f; // The speed in which the drone can rotate.
+	public float tiltSpeed = 4.4f; // The speed in which the drone will try to bank and pitch.
+	public float maxTilt = 40.0f; // The maximum angle in degrees that the drone may tilt to.
 
 	private Rigidbody rb;
 	private float thrust; // The level of thrust being applied to the drone.
 	private bool hover = true; // The Drone will hover using the idleThrust variable.
-	private bool banking = false; // If the drone is banking at all.
 	private bool flipLock = true; // If the drone should be allowed to flip, toggleable.
 
 	private float angleBank; // The desired angle of the bank.
@@ -37,16 +36,15 @@ public class PlayerController : MonoBehaviour {
 
 		// Thrust control.
 		if (Input.GetKey (KeyCode.W)) {
-			// Apply the max thrust.
 			thrust = maxThrust;
 			hover = false;
-		} else if (Input.GetKey(KeyCode.S) || hover == false) {
-			// Apply minimum thrust.
+		} else if (Input.GetKey (KeyCode.S)) {
 			thrust = minThrust;
 			hover = false;
-		} else {
-			// Hover.
+		} else if (hover) {
 			thrust = idleThrust;
+		} else {
+			thrust = 0;
 		}
 
 		// Angles for banking upon key press.
