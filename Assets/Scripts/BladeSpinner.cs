@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BladeSpinner : MonoBehaviour {
 
-	[Range(1000,3000)]
+	[Range(100,3000)]
 	public float bladeSpeed = 1500;
 
 	// Use this for initialization
